@@ -34,10 +34,7 @@ elementoFormulario.addEventListener("submit", (event: SubmitEvent) => {
     return;
   }
 
-  elementoSaldo.textContent = saldo.toLocaleString("pt-br", {
-    currency: "BRL",
-    style: "currency",
-  });
+  elementoSaldo.textContent = formatarMoeda(saldo);
 
   const novaTransacao: Transacao = {
     tipoTransacao: tipoTransacao,
