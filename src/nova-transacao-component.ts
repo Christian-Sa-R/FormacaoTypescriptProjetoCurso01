@@ -1,8 +1,3 @@
-let saldo = 3000;
-
-const elementoSaldo = document.querySelector(".valor") as HTMLElement;
-elementoSaldo.textContent = saldo.toString();
-
 const elementoFormulario = document.querySelector(
   ".block-nova-transacao form",
 ) as HTMLFormElement;
@@ -23,15 +18,15 @@ elementoFormulario.addEventListener("submit", (event: SubmitEvent) => {
     "#data",
   ) as HTMLInputElement;
 
-  let tipoTransacao: string = inputTipoTransacao.value;
+  let tipoTransacao: TipoTransacao = inputTipoTransacao.value as TipoTransacao;
   let valor: number = inputValor.valueAsNumber;
   let data: Date = new Date(inputData.value);
 
-  if (tipoTransacao === "Depósito") {
+  if (tipoTransacao === TipoTransacao.DEPOSITO) {
     saldo += valor;
   } else if (
-    tipoTransacao === "Transferência" ||
-    tipoTransacao === "Pagamento de Boleto"
+    tipoTransacao === TipoTransacao.TRANSFERENCIA ||
+    tipoTransacao === TipoTransacao.PAGAMENTO_BOLETO
   ) {
     saldo -= valor;
   } else {
@@ -39,9 +34,12 @@ elementoFormulario.addEventListener("submit", (event: SubmitEvent) => {
     return;
   }
 
-  elementoSaldo.textContent = saldo.toString();
+  elementoSaldo.textContent = saldo.toLocaleString("pt-br", {
+    currency: "BRL",
+    style: "currency",
+  });
 
-  const novaTransacao = {
+  const novaTransacao: Transacao = {
     tipoTransacao: tipoTransacao,
     valor: valor,
     data: data,
