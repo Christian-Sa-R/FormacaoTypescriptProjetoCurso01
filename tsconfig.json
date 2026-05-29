@@ -3,7 +3,8 @@
     "target": "es2025",
     "rootDir": "./src",
     "outDir": "./dist/js/",
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "experimentalDecorators": true
   },
   "include": ["./src/**/*"]
 }
